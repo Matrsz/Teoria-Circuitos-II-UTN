@@ -4,23 +4,25 @@
 using Markdown
 using InteractiveUtils
 
-# ╔═╡ 23cba35f-1e9e-4688-a961-35570e529324
+# ╔═╡ 550a6097-7c37-41dc-aa8c-0da7b523f31a
 begin
+	using Pkg
+	Pkg.add.(["Revise", "ImportMacros", "ControlSystems", "Latexify", "LaTeXStrings"])
 	using Latexify
 	using LaTeXStrings      
+	
 	struct Wow
-	filename
+		filename
 	end
-
 	function Base.show(io::IO, ::MIME"image/png", w::Wow)
-	write(io, read(w.filename))
+		write(io, read(w.filename))
 	end
+	
+	md"# Teoría de Circuitos II - Filtro Pasa Todo"
 end
 
 # ╔═╡ 02547e64-49d4-487f-8166-21a79e204420
-md"# Teoría de Circuitos II - Filtro Pasa Todo
-
-Tomamos el siguiente circuito, con el objetivo de analizar y simular su transferencia."
+md"Tomamos el siguiente circuito, con el objetivo de analizar y simular su transferencia."
 
 # ╔═╡ 2d83491c-b238-40d2-903a-e6368089bdd3
 Wow("Images/circuito.png")
@@ -109,7 +111,7 @@ Wow("Images/sim.png")
 md"Es un comportamiento equivalente a la simulación numérica a bajas frecuencias, filtro pasa todo, pero el comportamiento difiere a altas frecuencias donde el efecto del capacitor del modelo integrador es apreciable, y la transferencia real disminuye." 
 
 # ╔═╡ Cell order:
-# ╟─23cba35f-1e9e-4688-a961-35570e529324
+# ╟─550a6097-7c37-41dc-aa8c-0da7b523f31a
 # ╟─02547e64-49d4-487f-8166-21a79e204420
 # ╟─2d83491c-b238-40d2-903a-e6368089bdd3
 # ╟─67c80a93-838d-4f72-b917-75ff417e1d71
