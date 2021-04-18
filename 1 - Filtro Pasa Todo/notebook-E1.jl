@@ -4,20 +4,28 @@
 using Markdown
 using InteractiveUtils
 
-# ╔═╡ 550a6097-7c37-41dc-aa8c-0da7b523f31a
+# ╔═╡ 020750d2-6fac-4518-9d36-a477e87d90d6
 begin
-	using Pkg
-	Pkg.add.(["Revise", "ImportMacros", "ControlSystems", "Latexify", "LaTeXStrings"])
 	using Latexify
 	using LaTeXStrings      
-	
+end
+
+# ╔═╡ 5490b3c2-4421-42cf-81bb-6efa62317aab
+using ControlSystems
+
+# ╔═╡ b69f9cbc-b116-4206-9ede-2a3a2d6bc135
+begin
 	struct Wow
 		filename
 	end
+
 	function Base.show(io::IO, ::MIME"image/png", w::Wow)
 		write(io, read(w.filename))
 	end
-	
+end
+
+# ╔═╡ 550a6097-7c37-41dc-aa8c-0da7b523f31a
+begin
 	md"# Teoría de Circuitos II - Filtro Pasa Todo
 	
 Tomamos el siguiente circuito, con el objetivo de analizar y simular su transferencia."
@@ -58,9 +66,6 @@ end
 # ╔═╡ 67d13c95-9f5d-4753-90ed-b15612b89945
 md"La simulación numérica la vamos a realizar en el lenguaje Julia, usando el módulo ControlSystems.jl"
 
-# ╔═╡ 5490b3c2-4421-42cf-81bb-6efa62317aab
-import ControlSystems as cs
-
 # ╔═╡ 97467fe3-f873-40a0-a402-f4c2d398b956
 begin
 	    R1 = 1e3;
@@ -80,19 +85,19 @@ den = [C/R2,  1/(R2*R3)]
 md"ControlSystems.tf retorna H como un objeto TransferFunction:"
 
 # ╔═╡ 5d68641a-ac0b-48c8-b7aa-9f4798f1f729
-H = cs.tf(num, den)
+H = tf(num, den)
 
 # ╔═╡ 0b356ae9-a7a0-4e19-add1-1d7498c10869
 md"ControlSystems.bodeplot toma el obtjeto TransferFunction y obtiene la respuesta en frecuencia,que efectivamente corresponde a un filtro pasa todo." 
 
 # ╔═╡ 006447ea-7984-4eb2-916d-e85181b639c3
-p = cs.bodeplot(H)
+bodeplot(H)
 
 # ╔═╡ 77224aa9-e2cc-493c-a810-4affe4b33428
 md"ControlSystems.rlocusplot toma el objeto TransferFunction y obtiene el diagrama de polos y ceros, que evidencia la estabilidad del sistema y hace visible la condición de filtro pasa todo: simetría de polos y ceros respecto al eje jw."
 
 # ╔═╡ 2162cb78-efdf-4b65-bed0-e87b2b28d829
-cs.rlocusplot(H; aspect_ratio=:equal, framestyle=:origin)
+rlocusplot(H; aspect_ratio=:equal, framestyle=:origin)
 
 # ╔═╡ cd8440fe-d58d-4c2f-a233-2f1aaec2c647
 md"Finalmente, volviendo al modelo en LTSpice comparamos los resultados de la simulación numérica con una simulación circuital"
@@ -119,18 +124,20 @@ md"Es un comportamiento equivalente a la simulación numérica a bajas frecuenci
 # ╟─14dfa10b-ab0d-4b6b-b3b9-aad4838c157b
 # ╟─8eaa07ab-f6f1-45aa-a929-f25958bfef73
 # ╟─67d13c95-9f5d-4753-90ed-b15612b89945
-# ╠═5490b3c2-4421-42cf-81bb-6efa62317aab
+# ╟─5490b3c2-4421-42cf-81bb-6efa62317aab
 # ╟─97467fe3-f873-40a0-a402-f4c2d398b956
-# ╠═3f47cbfb-ccb5-4f19-99fb-387ccdc26554
-# ╠═536d941c-24e3-454d-b8af-1da615cee757
+# ╟─3f47cbfb-ccb5-4f19-99fb-387ccdc26554
+# ╟─536d941c-24e3-454d-b8af-1da615cee757
 # ╟─578b5413-6af8-429b-8e6f-4581704a21e6
-# ╠═5d68641a-ac0b-48c8-b7aa-9f4798f1f729
+# ╟─5d68641a-ac0b-48c8-b7aa-9f4798f1f729
 # ╟─0b356ae9-a7a0-4e19-add1-1d7498c10869
-# ╠═006447ea-7984-4eb2-916d-e85181b639c3
+# ╟─006447ea-7984-4eb2-916d-e85181b639c3
 # ╟─77224aa9-e2cc-493c-a810-4affe4b33428
-# ╠═2162cb78-efdf-4b65-bed0-e87b2b28d829
+# ╟─2162cb78-efdf-4b65-bed0-e87b2b28d829
 # ╟─cd8440fe-d58d-4c2f-a233-2f1aaec2c647
 # ╟─ecd5ba2f-0337-4e8d-bdb0-4e8e2c15607b
 # ╟─c5d02935-1c7c-47bd-8b52-d0f238c8cd9b
 # ╟─0193b0ca-26ff-45ce-bdaa-650a5fc807dd
 # ╟─26701700-7abf-40a6-a11f-776684f48ba7
+# ╟─b69f9cbc-b116-4206-9ede-2a3a2d6bc135
+# ╟─020750d2-6fac-4518-9d36-a477e87d90d6
