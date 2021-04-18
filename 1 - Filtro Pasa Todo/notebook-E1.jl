@@ -18,11 +18,10 @@ begin
 		write(io, read(w.filename))
 	end
 	
-	md"# Teoría de Circuitos II - Filtro Pasa Todo"
+	md"# Teoría de Circuitos II - Filtro Pasa Todo
+	
+Tomamos el siguiente circuito, con el objetivo de analizar y simular su transferencia."
 end
-
-# ╔═╡ 02547e64-49d4-487f-8166-21a79e204420
-md"Tomamos el siguiente circuito, con el objetivo de analizar y simular su transferencia."
 
 # ╔═╡ 2d83491c-b238-40d2-903a-e6368089bdd3
 Wow("Images/circuito.png")
@@ -112,7 +111,6 @@ md"Es un comportamiento equivalente a la simulación numérica a bajas frecuenci
 
 # ╔═╡ Cell order:
 # ╟─550a6097-7c37-41dc-aa8c-0da7b523f31a
-# ╟─02547e64-49d4-487f-8166-21a79e204420
 # ╟─2d83491c-b238-40d2-903a-e6368089bdd3
 # ╟─67c80a93-838d-4f72-b917-75ff417e1d71
 # ╟─70bb620a-b3d3-4d48-a591-f2e3abbb5f59
