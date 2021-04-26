@@ -4,24 +4,18 @@
 using Markdown
 using InteractiveUtils
 
-# ╔═╡ 020750d2-6fac-4518-9d36-a477e87d90d6
+# ╔═╡ 53d9d2c0-0369-403e-8378-858663608a35
 begin
-	using Latexify
-	using LaTeXStrings      
-end
-
-# ╔═╡ 5490b3c2-4421-42cf-81bb-6efa62317aab
-using ControlSystems
-
-# ╔═╡ b69f9cbc-b116-4206-9ede-2a3a2d6bc135
-begin
-	struct Wow
-		filename
-	end
-
-	function Base.show(io::IO, ::MIME"image/png", w::Wow)
-		write(io, read(w.filename))
-	end
+    import Pkg
+    Pkg.activate(mktempdir())
+    Pkg.add([
+        Pkg.PackageSpec(name="Latexify"),
+        Pkg.PackageSpec(name="LaTeXStrings"),
+        Pkg.PackageSpec(name="ControlSystems")
+    ])
+    using Latexify
+    using LaTeXStrings
+	using ControlSystems
 end
 
 # ╔═╡ 550a6097-7c37-41dc-aa8c-0da7b523f31a
@@ -30,9 +24,6 @@ begin
 	
 Tomamos el siguiente circuito, con el objetivo de analizar y simular su transferencia."
 end
-
-# ╔═╡ 2d83491c-b238-40d2-903a-e6368089bdd3
-Wow("Images/circuito.png")
 
 # ╔═╡ 67c80a93-838d-4f72-b917-75ff417e1d71
 md"Si se usa el modelo OpAmp ideal $:\, V^+=V^-=V_x, \quad Z_{in}\rightarrow\infty$ se encuentra la siguiente ecuación matricial aplicando ley de nodos a $V^+$y $V^-$:"
@@ -102,17 +93,31 @@ rlocusplot(H; aspect_ratio=:equal, framestyle=:origin)
 # ╔═╡ cd8440fe-d58d-4c2f-a233-2f1aaec2c647
 md"Finalmente, volviendo al modelo en LTSpice comparamos los resultados de la simulación numérica con una simulación circuital"
 
-# ╔═╡ ecd5ba2f-0337-4e8d-bdb0-4e8e2c15607b
-Wow("Images/circuito.png")
-
 # ╔═╡ c5d02935-1c7c-47bd-8b52-d0f238c8cd9b
 md"La simulación de LTSpice, a diferencia del modelo ideal, implementa el modelo integrador del amplificador operacional. El resultado es el siguiente:" 
 
-# ╔═╡ 0193b0ca-26ff-45ce-bdaa-650a5fc807dd
-Wow("Images/sim.png")
-
 # ╔═╡ 26701700-7abf-40a6-a11f-776684f48ba7
 md"Es un comportamiento equivalente a la simulación numérica a bajas frecuencias, filtro pasa todo, pero el comportamiento difiere a altas frecuencias donde el efecto del capacitor del modelo integrador es apreciable, y la transferencia real disminuye." 
+
+# ╔═╡ b69f9cbc-b116-4206-9ede-2a3a2d6bc135
+begin
+	struct Wow
+		filename
+	end
+
+	function Base.show(io::IO, ::MIME"image/png", w::Wow)
+		write(io, read(w.filename))
+	end
+end
+
+# ╔═╡ 2d83491c-b238-40d2-903a-e6368089bdd3
+Wow("Images/circuito.png")
+
+# ╔═╡ ecd5ba2f-0337-4e8d-bdb0-4e8e2c15607b
+Wow("Images/circuito.png")
+
+# ╔═╡ 0193b0ca-26ff-45ce-bdaa-650a5fc807dd
+Wow("Images/sim.png")
 
 # ╔═╡ Cell order:
 # ╟─550a6097-7c37-41dc-aa8c-0da7b523f31a
@@ -124,7 +129,6 @@ md"Es un comportamiento equivalente a la simulación numérica a bajas frecuenci
 # ╟─14dfa10b-ab0d-4b6b-b3b9-aad4838c157b
 # ╟─8eaa07ab-f6f1-45aa-a929-f25958bfef73
 # ╟─67d13c95-9f5d-4753-90ed-b15612b89945
-# ╟─5490b3c2-4421-42cf-81bb-6efa62317aab
 # ╟─97467fe3-f873-40a0-a402-f4c2d398b956
 # ╟─3f47cbfb-ccb5-4f19-99fb-387ccdc26554
 # ╟─536d941c-24e3-454d-b8af-1da615cee757
@@ -133,11 +137,11 @@ md"Es un comportamiento equivalente a la simulación numérica a bajas frecuenci
 # ╟─0b356ae9-a7a0-4e19-add1-1d7498c10869
 # ╟─006447ea-7984-4eb2-916d-e85181b639c3
 # ╟─77224aa9-e2cc-493c-a810-4affe4b33428
-# ╟─2162cb78-efdf-4b65-bed0-e87b2b28d829
+# ╠═2162cb78-efdf-4b65-bed0-e87b2b28d829
 # ╟─cd8440fe-d58d-4c2f-a233-2f1aaec2c647
 # ╟─ecd5ba2f-0337-4e8d-bdb0-4e8e2c15607b
 # ╟─c5d02935-1c7c-47bd-8b52-d0f238c8cd9b
 # ╟─0193b0ca-26ff-45ce-bdaa-650a5fc807dd
 # ╟─26701700-7abf-40a6-a11f-776684f48ba7
 # ╟─b69f9cbc-b116-4206-9ede-2a3a2d6bc135
-# ╟─020750d2-6fac-4518-9d36-a477e87d90d6
+# ╠═53d9d2c0-0369-403e-8378-858663608a35
