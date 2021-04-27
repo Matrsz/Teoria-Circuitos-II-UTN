@@ -9,7 +9,6 @@ begin
     import Pkg
     Pkg.activate(mktempdir())
     Pkg.add([
-		Pkg.PackageSpec(name="Revise"),
         Pkg.PackageSpec(name="Latexify"),
         Pkg.PackageSpec(name="LaTeXStrings"),
         Pkg.PackageSpec(name="Plots"),
@@ -17,13 +16,13 @@ begin
 		Pkg.PackageSpec(name="ColorSchemes"),
 		Pkg.PackageSpec(name="PlotThemes")
     ])
-	using Revise
     using Latexify
     using LaTeXStrings
 	using Plots
 	using ControlSystems
 	using ColorSchemes
 	using PlotThemes
+	theme(:juno)
 end
 
 # ╔═╡ 451411e9-6eb1-4ad1-97cd-946300511c0d
@@ -136,9 +135,6 @@ Wow("Images/sim.png")
 # ╔═╡ f99891ef-ab72-4bcb-8e14-10a70cdc5750
 DarkMode.enable(theme="nord")
 
-# ╔═╡ 4530598e-5fe7-4e7e-99ca-ff1adb1a6040
-theme(:juno)
-
 # ╔═╡ Cell order:
 # ╟─550a6097-7c37-41dc-aa8c-0da7b523f31a
 # ╟─2d83491c-b238-40d2-903a-e6368089bdd3
@@ -167,4 +163,3 @@ theme(:juno)
 # ╟─53d9d2c0-0369-403e-8378-858663608a35
 # ╟─451411e9-6eb1-4ad1-97cd-946300511c0d
 # ╟─f99891ef-ab72-4bcb-8e14-10a70cdc5750
-# ╟─4530598e-5fe7-4e7e-99ca-ff1adb1a6040
