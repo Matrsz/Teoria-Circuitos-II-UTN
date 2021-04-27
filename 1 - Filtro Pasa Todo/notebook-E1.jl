@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.14.3
+# v0.14.4
 
 using Markdown
 using InteractiveUtils
@@ -22,7 +22,6 @@ begin
 	using ControlSystems
 	using ColorSchemes
 	using PlotThemes
-	theme(:juno)
 end
 
 # ╔═╡ 451411e9-6eb1-4ad1-97cd-946300511c0d
@@ -95,13 +94,19 @@ H = tf(num, den)
 md"ControlSystems.bodeplot toma el obtjeto TransferFunction y obtiene la respuesta en frecuencia,que efectivamente corresponde a un filtro pasa todo." 
 
 # ╔═╡ 006447ea-7984-4eb2-916d-e85181b639c3
-bodeplot(H, palette=:seaborn_muted6)
+begin
+	theme(:juno)
+	bodeplot(H, palette=:seaborn_muted6, thm=:juno)
+end
 
 # ╔═╡ 77224aa9-e2cc-493c-a810-4affe4b33428
 md"ControlSystems.rlocusplot toma el objeto TransferFunction y obtiene el diagrama de polos y ceros, que evidencia la estabilidad del sistema y hace visible la condición de filtro pasa todo: simetría de polos y ceros respecto al eje jw."
 
 # ╔═╡ 2162cb78-efdf-4b65-bed0-e87b2b28d829
-rlocusplot(H; aspect_ratio=:equal, framestyle=:origin, palette=:seaborn_muted6)
+begin
+	theme(:juno)
+	rlocusplot(H; aspect_ratio=:equal, framestyle=:origin, palette=:seaborn_muted6)
+end
 
 # ╔═╡ cd8440fe-d58d-4c2f-a233-2f1aaec2c647
 md"Finalmente, volviendo al modelo en LTSpice comparamos los resultados de la simulación numérica con una simulación circuital"
@@ -159,7 +164,7 @@ DarkMode.enable(theme="nord")
 # ╟─c5d02935-1c7c-47bd-8b52-d0f238c8cd9b
 # ╟─0193b0ca-26ff-45ce-bdaa-650a5fc807dd
 # ╟─26701700-7abf-40a6-a11f-776684f48ba7
-# ╟─b69f9cbc-b116-4206-9ede-2a3a2d6bc135
-# ╟─53d9d2c0-0369-403e-8378-858663608a35
-# ╟─451411e9-6eb1-4ad1-97cd-946300511c0d
+# ╠═b69f9cbc-b116-4206-9ede-2a3a2d6bc135
+# ╠═53d9d2c0-0369-403e-8378-858663608a35
+# ╠═451411e9-6eb1-4ad1-97cd-946300511c0d
 # ╟─f99891ef-ab72-4bcb-8e14-10a70cdc5750
