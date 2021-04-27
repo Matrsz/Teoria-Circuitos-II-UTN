@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.14.2
+# v0.14.3
 
 using Markdown
 using InteractiveUtils
@@ -12,6 +12,7 @@ begin
 		Pkg.PackageSpec(name="Revise"),
         Pkg.PackageSpec(name="Latexify"),
         Pkg.PackageSpec(name="LaTeXStrings"),
+        Pkg.PackageSpec(name="Plots"),
         Pkg.PackageSpec(name="ControlSystems"),
 		Pkg.PackageSpec(name="ColorSchemes"),
 		Pkg.PackageSpec(name="PlotThemes")
@@ -19,6 +20,7 @@ begin
 	using Revise
     using Latexify
     using LaTeXStrings
+	using Plots
 	using ControlSystems
 	using ColorSchemes
 	using PlotThemes
@@ -28,12 +30,6 @@ end
 begin
 	Pkg.add(url="https://github.com/Pocket-titan/DarkMode")
     import DarkMode
-end
-
-# ╔═╡ 7db3794b-9194-428c-a745-8ec848acadb5
-begin
-	using Plots
-	theme(:juno)
 end
 
 # ╔═╡ 550a6097-7c37-41dc-aa8c-0da7b523f31a
@@ -137,8 +133,11 @@ Wow("Images/circuito.png")
 # ╔═╡ 0193b0ca-26ff-45ce-bdaa-650a5fc807dd
 Wow("Images/sim.png")
 
-# ╔═╡ 40ed78f5-ab4a-4fcc-b204-a1cec7f8595a
+# ╔═╡ f99891ef-ab72-4bcb-8e14-10a70cdc5750
 DarkMode.enable(theme="nord")
+
+# ╔═╡ 4530598e-5fe7-4e7e-99ca-ff1adb1a6040
+theme(:juno)
 
 # ╔═╡ Cell order:
 # ╟─550a6097-7c37-41dc-aa8c-0da7b523f31a
@@ -167,5 +166,5 @@ DarkMode.enable(theme="nord")
 # ╟─b69f9cbc-b116-4206-9ede-2a3a2d6bc135
 # ╟─53d9d2c0-0369-403e-8378-858663608a35
 # ╟─451411e9-6eb1-4ad1-97cd-946300511c0d
-# ╟─40ed78f5-ab4a-4fcc-b204-a1cec7f8595a
-# ╟─7db3794b-9194-428c-a745-8ec848acadb5
+# ╟─f99891ef-ab72-4bcb-8e14-10a70cdc5750
+# ╟─4530598e-5fe7-4e7e-99ca-ff1adb1a6040
