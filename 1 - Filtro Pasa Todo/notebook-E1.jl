@@ -160,9 +160,9 @@ DarkMode.enable(theme="nord")
 # ╟─77224aa9-e2cc-493c-a810-4affe4b33428
 # ╠═2162cb78-efdf-4b65-bed0-e87b2b28d829
 # ╟─cd8440fe-d58d-4c2f-a233-2f1aaec2c647
-# ╠═ecd5ba2f-0337-4e8d-bdb0-4e8e2c15607b
+# ╟─ecd5ba2f-0337-4e8d-bdb0-4e8e2c15607b
 # ╟─c5d02935-1c7c-47bd-8b52-d0f238c8cd9b
-# ╠═0193b0ca-26ff-45ce-bdaa-650a5fc807dd
+# ╟─0193b0ca-26ff-45ce-bdaa-650a5fc807dd
 # ╟─26701700-7abf-40a6-a11f-776684f48ba7
 # ╟─b69f9cbc-b116-4206-9ede-2a3a2d6bc135
 # ╟─53d9d2c0-0369-403e-8378-858663608a35
