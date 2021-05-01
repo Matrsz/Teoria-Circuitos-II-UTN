@@ -141,8 +141,8 @@ Wow("Images/sim.png")
 DarkMode.enable(theme="nord")
 
 # ╔═╡ Cell order:
-# ╠═550a6097-7c37-41dc-aa8c-0da7b523f31a
-# ╠═2d83491c-b238-40d2-903a-e6368089bdd3
+# ╟─550a6097-7c37-41dc-aa8c-0da7b523f31a
+# ╟─2d83491c-b238-40d2-903a-e6368089bdd3
 # ╟─67c80a93-838d-4f72-b917-75ff417e1d71
 # ╟─70bb620a-b3d3-4d48-a591-f2e3abbb5f59
 # ╟─b9353662-c3ca-460d-8724-ff01d8692b32
@@ -160,7 +160,7 @@ DarkMode.enable(theme="nord")
 # ╟─77224aa9-e2cc-493c-a810-4affe4b33428
 # ╠═2162cb78-efdf-4b65-bed0-e87b2b28d829
 # ╟─cd8440fe-d58d-4c2f-a233-2f1aaec2c647
-# ╠═ecd5ba2f-0337-4e8d-bdb0-4e8e2c15607b
+# ╟─ecd5ba2f-0337-4e8d-bdb0-4e8e2c15607b
 # ╟─c5d02935-1c7c-47bd-8b52-d0f238c8cd9b
 # ╟─0193b0ca-26ff-45ce-bdaa-650a5fc807dd
 # ╟─26701700-7abf-40a6-a11f-776684f48ba7

@@ -85,27 +85,32 @@ V_X\\ V_2\\ V_3\\ V_4\\
 \end{bmatrix} V_i$"
 
 
+# ╔═╡ 44009b12-cbe2-4d18-ba4a-9b4bcf71f465
+s = symbols(:s)
+
+# ╔═╡ c5d3db4a-7931-49ae-86dc-a8db73ae2ba1
+md"(La funcionalidad interactiva de Pluto Notebooks es todavía incompatible con Github Pages)"
+
 # ╔═╡ fe9697e4-135a-4dd2-9bf1-3d47f6a9da0e
-R = @bind R Slider(1:100; default=1, show_value=true)
+#Rs = @bind R Slider(1:100; default=1, show_value=true)
+Rs = 1
 
 # ╔═╡ e01e76cf-6384-4534-8382-eea9a040e25d
-C = @bind C Slider(1:100; default=100, show_value=true)
+#Cs = @bind C Slider(1:100; default=100, show_value=true)
+Cs = 100
 
 # ╔═╡ f25d8bcd-5887-4332-b54e-d9fb540825f2
 begin
-	R1 = R*1e3;
-	R2 = R*1e3;
-	R3 = R*1e3;
-	R4 = R*1e3;
-	R5 = R*1e3;
-	R6 = R*1e3;
-	C2 = C*1e-9;
-	C3 = C*1e-9;
-	md"Usando el paquete SymEngine.jl, se puede llegar a una resolución numérica-simbólica, definiendo la variable simbólica s y los valores numéricos de R y C. Los selectores permiten asignar valores a R en kΩ y C en nF para observar su efecto en la transferencia."
+	R1 = Rs*1e3;
+	R2 = Rs*1e3;
+	R3 = Rs*1e3;
+	R4 = Rs*1e3;
+	R5 = Rs*1e3;
+	R6 = Rs*1e3;
+	C2 = Cs*1e-9;
+	C3 = Cs*1e-9;
+	md"Usando el paquete SymEngine.jl, se puede llegar a una resolución numérica-simbólica, definiendo la variable simbólica s y los valores numéricos de R y C. Los selectores permitirían asignar valores a R en kΩ y C en nF para observar su efecto en la transferencia."
 end
-
-# ╔═╡ 44009b12-cbe2-4d18-ba4a-9b4bcf71f465
-s = symbols(:s)
 
 # ╔═╡ 71d5083b-ba6c-4a77-a0c9-3b79a282e636
 md"En función de eso, se instancia la matriz de admitancias Y y el vector de parámetros i."
@@ -132,6 +137,9 @@ begin
 	H3(s) = H[4]
 end
 
+# ╔═╡ 4b87aa13-e337-4512-b477-8e125da89e39
+md"Las transferencias corresponden respectivamente a H1 pasa altos, H2 pasa banda, y H3 pasa bajos." 
+
 # ╔═╡ eb0ea7cc-49f9-4e15-9382-193b52ad485c
 latexstring("H_1(s) ="*latexraw(H1(s)))
 
@@ -140,9 +148,6 @@ latexstring("H_2(s) ="*latexraw(H2(s)))
 
 # ╔═╡ 1f845ecc-353a-42c8-80dc-159bed6d1652
 latexstring("H_3(s) ="*latexraw(H3(s)))
-
-# ╔═╡ 4b87aa13-e337-4512-b477-8e125da89e39
-md"Las transferencias corresponden respectivamente a H1 pasa altos, H2 pasa banda, y H3 pasa bajos." 
 
 # ╔═╡ 5e678738-638b-44c3-9d6a-df86c3788e01
 md"Definiendo la variable simbólica w, SymEngine.jl permite sustituir s = jw en la transferencia H(s) para visualizar las transferencias como diagrama de Bode."
@@ -166,6 +171,52 @@ begin
 	pH3 = plot(abs(H3w(w)), 1, 1e8, xaxis=:log, yaxis=:log, label="H3", xlabel="w")
 	plot(pH1, pH2, pH3, layout = (3,1))	
 end
+
+# ╔═╡ 1df8580c-d92d-4c17-b9f7-d934379c80ad
+md"Ahora se procede a una resolución puramente simbólica de la transferencia del filtro, definiendo R y C como variables. Por simplicidad del resultado final suponemos resistencias y capacitores de igual valor." 
+
+# ╔═╡ cfee3c91-9ec7-4e1f-9fda-f7b9fb2407e0
+@vars R C
+
+# ╔═╡ 51bee854-294a-44c3-89ae-392969e53c08
+Ys = [1/R+1/R -1/R  0   -1/R;
+      0        1/R  s*C  0;
+      0        0    1/R  s*C;
+     1 /R+1/R  0   -1/R  0]
+
+# ╔═╡ 690f4c2c-a454-4c18-b798-13f4e2c08eb8
+is = [0; 0; 0; 1/R]
+
+# ╔═╡ 8d914ac6-b6fd-4ab9-a7d4-40645205c3ea
+begin
+	Hs = expand.(inv(Ys)*is)
+	Hs1(s) = Hs[2]
+	Hs2(s) = Hs[3]
+	Hs3(s) = Hs[4]
+	md"Con un procedimiento idéntico al anterior se puede obtener una expresión puramente simbólica de las transferencias H1, H2, H3:"
+end
+
+# ╔═╡ 0d8fa251-0e1e-4f24-9e4b-5eab54cb483d
+latexstring("H_1(s) ="*latexraw(Hs1(s)))
+
+# ╔═╡ 3ecde8b1-5b0c-4a78-8768-46a5cdf25dff
+latexstring("H_2(s) ="*latexraw(Hs2(s)))
+
+# ╔═╡ 28fe2ae9-9f71-4dfb-a8a0-bcb925498978
+latexstring("H_3(s) ="*latexraw(Hs3(s)))
+
+# ╔═╡ 35ee3ea7-465e-4890-8bd9-98066ddfb10a
+md"O bien, escrito de la forma habitual:"
+
+# ╔═╡ 7642f158-b9ab-4ca5-af98-0ca8fb9c053c
+	L"$\begin{aligned}
+	H_1(s) &= \frac{R^2C^2s^2}{R^2C^2s+RCs+1}\\[1em]
+	H_2(s) &= \frac{RCs}{R^2C^2s+RCs+1}\\[1em]
+	H_1(s) &= \frac{1}{R^2C^2s+RCs+1}\\
+	\end{aligned}$"
+
+# ╔═╡ 8a097b97-65bb-4b9f-87c2-25226ab2a7fc
+md"Es decir, resultan tres filtros con frecuencia de corte wc=RC, que en el caso particular correspondiente a la resolución numérica de R = 1kΩ y C = 100nF retorna una frecuencia wc = 10000 rad/s, consistente con lo visto en los diagramas de Bode."
 
 # ╔═╡ 6ec8a49a-fb90-493a-8301-9aa23c482c25
 begin
@@ -192,9 +243,10 @@ DarkMode.enable(theme="nord")
 # ╟─7c4cd737-ea86-4d02-92bf-774f8fb04ad0
 # ╟─248a48d7-493b-4506-ae69-3fdbbf82f7c9
 # ╟─f25d8bcd-5887-4332-b54e-d9fb540825f2
-# ╟─fe9697e4-135a-4dd2-9bf1-3d47f6a9da0e
-# ╟─e01e76cf-6384-4534-8382-eea9a040e25d
 # ╠═44009b12-cbe2-4d18-ba4a-9b4bcf71f465
+# ╟─c5d3db4a-7931-49ae-86dc-a8db73ae2ba1
+# ╠═fe9697e4-135a-4dd2-9bf1-3d47f6a9da0e
+# ╠═e01e76cf-6384-4534-8382-eea9a040e25d
 # ╟─71d5083b-ba6c-4a77-a0c9-3b79a282e636
 # ╠═1092d595-c1db-4a08-9d18-dacc808e8ae9
 # ╠═e73c6a27-f6ec-4e05-8fc2-5e277a6c05ce
@@ -208,6 +260,17 @@ DarkMode.enable(theme="nord")
 # ╠═eea7c707-8c2f-48e4-86d9-4ede8b111fab
 # ╟─b0fec057-d05b-4a9b-835e-cd267465ff0a
 # ╟─44bac19d-b875-478e-8a68-2b640765f8cf
+# ╟─1df8580c-d92d-4c17-b9f7-d934379c80ad
+# ╟─cfee3c91-9ec7-4e1f-9fda-f7b9fb2407e0
+# ╟─51bee854-294a-44c3-89ae-392969e53c08
+# ╟─690f4c2c-a454-4c18-b798-13f4e2c08eb8
+# ╟─8d914ac6-b6fd-4ab9-a7d4-40645205c3ea
+# ╟─0d8fa251-0e1e-4f24-9e4b-5eab54cb483d
+# ╟─3ecde8b1-5b0c-4a78-8768-46a5cdf25dff
+# ╟─28fe2ae9-9f71-4dfb-a8a0-bcb925498978
+# ╟─35ee3ea7-465e-4890-8bd9-98066ddfb10a
+# ╟─7642f158-b9ab-4ca5-af98-0ca8fb9c053c
+# ╟─8a097b97-65bb-4b9f-87c2-25226ab2a7fc
 # ╟─6ec8a49a-fb90-493a-8301-9aa23c482c25
 # ╟─10aba104-a93f-11eb-29ed-4136efb69580
 # ╟─1a671d44-ac1c-4871-8bcd-7d16642f34e0
